@@ -1,0 +1,76 @@
+= devise_sms_authenticatable
+
+Devise Sms Authenticatable is a snap-in for Devise that will make any resource authenticatable via SMS.
+The user will receive an SMS with a token that can be entered on the site to sign in.
+Ask the user his phone (and phone confirmation to double check) on registration and the token will be sended automagically.
+
+This gem enables One Factor Authentication (via SMS) with an OTP.
+
+== Installation for Rails ~> 3.0 and Devise ~> 1.1
+
+Install DeviseSmsAuthenticatable gem, it will also install dependencies (such as devise and warden):
+
+  gem install devise_sms_authenticatable
+
+Add DeviseSmsAuthenticatable to your Gemfile (and Devise if you weren't using them):
+  
+  gem 'devise',           '>= 1.1.0'
+  gem 'devise_sms_authenticatable', '~> 0.1.0'
+  
+=== Automatic installation
+  
+Run the following generator to add DeviseSmsAuthenticatable’s configuration option in the Devise configuration file (config/initializers/devise.rb) and the sms sender class in your lib folder:
+
+  rails generate devise_sms_authenticatable:install
+  
+When you are done, you are ready to add DeviseSmsAuthenticatable to any of your Devise models using the following generator:
+
+  rails generate devise_sms_authenticatable MODEL
+  
+Replace MODEL by the class name you want to add DeviseSmsAuthenticatable, like User, Admin, etc. This will add the :sms_authenticatable flag to your model's Devise modules. The generator will also create a migration file (if your ORM support them). Continue reading this file to understand exactly what the generator produces and how to use it.
+
+== Configuring views
+
+All the views are packaged inside the gem. If you'd like to customize the views, invoke the following generator and it will copy all the views to your application:
+
+  rails generate devise_sms_authenticatable:views
+
+You can also use the generator to generate scoped views:
+
+  rails generate devise_sms_authenticatable:views users
+
+Please refer to {Devise's README}[http://github.com/plataformatec/devise] for more information about views.
+
+== Usage
+
+The model is specular to the Devise's own Database Authenticatable model. It only requires the user to supply a valid phone number.
+
+On registration it will send an SMS with an authentication token.
+This token also confirms user activation.
+If you want something more "relaxed" just override <tt>sms_confirmation_required?</tt> in your model and make it your way.
+You can use the convenience filter <tt>require_sms_activated!</tt> in your controller to block sms-unactive users from specific pages.
+
+== Controller filter
+
+DeviseSmsAuthenticatable extends your controllers with a <tt>require_sms_confirmed!</tt> method. Use it to restrict part of the site to "confirmed users" only
+
+== I18n
+
+DeviseSmsAuthenticatable installs a localizable file in your config/locales folder.
+
+== Contributing to devise_sms_authenticatable
+ 
+* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
+* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
+* Fork the project
+* Start a feature/bugfix branch
+* Commit and push until you are happy with your contribution
+* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
+* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+== Copyright
+
+This gem is a fork of  Stefano Valicchia's devise_sms_activable
+Copyright (c) 2014 Stefano Valicchia. See LICENSE.txt for
+further details.
+

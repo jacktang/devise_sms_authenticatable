@@ -1,0 +1,11 @@
+<h2>Insert SMS Token</h2>
+
+<%= form_for(resource, :as => resource_name, :url => send_sms_sms_session_path(resource_name), :html => { :method => :post }) do |f| %>
+  
+  <p><%=label_tag :phone %><br />
+  <%=text_field_tag :phone%></p>
+ 
+  <p><%= f.submit "Resend SMS" %></p>
+<% end %>
+
+<%= render :partial => "devise/shared/links" %>

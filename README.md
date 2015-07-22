@@ -1,1 +1,0 @@
-# devise_sms_authenticatable

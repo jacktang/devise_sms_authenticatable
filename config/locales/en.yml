@@ -1,0 +1,15 @@
+en:
+  errors:
+     messages:
+       no_phone_associated: "No phone associated"
+       sms_already_confirmed: "This token has been already used"
+       sms_token_invalid: "was not locked"
+  devise:
+    sms_authenticatable:
+      send_token: 'An activation code was sent by SMS to %{phone}.'
+      sms_token_invalid: 'The sms code provided is not valid!'
+      confirmed: 'Your account has been activated. You are now signed in.'
+      sms_activation_required: 'SMS Code is required'
+      sms_body: 'Your SMS Code is %{sms_token}.'
+      unconfirmed_sms: 'Your account need to be activated with an SMS code'
+      
